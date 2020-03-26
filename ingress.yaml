@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: hangul-ingress
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: "hangul-static-ip"
+    networking.gke.io/managed-certificates: "hangul-cert"
+spec:
+  backend:
+    serviceName: hangul
+    servicePort: 80
+  rules:
+  - http:
+      paths:
+      - path: /pronounce
+        backend:
+          serviceName: hangul-api
+          servicePort: 80
